@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск</title>
+</head>
+<body>
+    <h1>Поиск типов литературы</h1>
+    <a href="{{ url_for('main') }}">На главную</a>
+
+    <form method="POST">
+        <input type="text" name="search_title" value="{{ search_title if search_title }}">
+        <button type="submit">Искать</button>
+    </form>
+
+    {% if search_results %}
+        <h2>Результаты:</h2>
+        <table border="1">
+            {% for result in search_results %}
+                <tr>
+                    <td>{{ result['id'] }}</td>
+                    <td>{{ result['nazvanie_tipa'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% elif search_title %}
+        <p>Ничего не найдено.</p>
+    {% endif %}
+</body>
+</html>

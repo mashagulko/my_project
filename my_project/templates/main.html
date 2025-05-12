@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+</head>
+<body>
+    <h1>Главная страница</h1>
+    
+    <div>
+        {% if session.logged_in %}
+        <a href="{{ url_for('search') }}">Поиск</a> 
+        <a href="{{ url_for('exampleInsertDb') }}">Добавить тип</a> 
+        <a href="{{ url_for('logout') }}">Выход</a>
+        {% else %}
+            <a href="{{ url_for('auth') }}">Войти</a>
+        {% endif %}
+    </div>
+    
+    <hr>
+    
+    <h2>Список пользователей</h2>
+    <table border="1">
+        <tr>
+            {% for column in column_names %}
+                <th>{{ column }}</th>
+            {% endfor %}
+            <th>Действия</th>
+        </tr>
+        {% for row in rows %}
+        <tr>
+            {% for value in row %}
+                <td>{{ value }}</td>
+            {% endfor %}
+           
+            <td>
+                <a href="{{ url_for('edit', id=row[0]) }}">Редактировать</a>
+                <a href="{{ url_for('delete', id=row[0]) }}" onclick="return confirm('Удалить?')">Удалить</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

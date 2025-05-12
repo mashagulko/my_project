@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <form action="/insert" method="post">
+      
+        <input type="text" name="title" id="">
+        <button type="submit">Сохранить</button>
+    </form>
+</div>
+<table border="1">
+    <tbody>
+        {% for i in data %}
+            <tr>
+                <td>{{ i[0] }}</td>
+                <td>{{ i[1] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
